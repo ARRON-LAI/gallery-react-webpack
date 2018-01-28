@@ -1,0 +1,57 @@
+/* Base Application Styles */
+html, body {
+  color: #fff;
+  background: #222;
+  width: 100%;
+  height: 100%;
+}
+
+.index img {
+  margin: 40px auto;
+  border-radius: 4px;
+  background: #fff;
+  display: block;
+}
+
+.index .notice {
+  margin: 20px auto;
+  padding: 15px 0;
+  text-align: center;
+  border: 1px solid #000;
+  border-width: 1px 0;
+  background: #666;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+
+  /* stage start */
+  .stage {
+    width: 100%;
+    height: 680px;
+    position: relative;
+  }
+  /* stage end */
+  
+  /* image section start */
+  .img-sec {
+    background-color: #ddd;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  /* image section start */
+
+  /* controller start */
+  .controller {
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    z-index: 101;
+    width: 100%;
+    text-align: center;
+  }
+  /* controller end*/
+}
