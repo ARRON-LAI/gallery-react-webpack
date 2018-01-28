@@ -39,8 +39,29 @@ html, body {
     background-color: #ddd;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: scroll;
     position: relative;
+
+    @at-root {
+      .img-figure {
+        background-color: #fff;
+        width: 320px;
+        height: 360px;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0 40px;
+
+        figcaption {
+          text-align: center;
+
+          .img-title {
+            font-size:16px;
+            margin: 20px 0 0 0;
+            color: #a7a0a2;
+          }
+        }
+      }
+    }
   }
   /* image section start */
 
