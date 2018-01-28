@@ -3,8 +3,15 @@ require('styles/App.scss');
 
 import React from 'react';
 
-let yeomanImage = require('../images/yeoman.png');
-let imageDat = require('../data/imageData.json');
+let imageData = require('../data/imageData.json');
+
+imageData = (function genImageData(imgs) {
+  for(let i = 0; i < imgs.length; ++i) {
+    const fn = imgs[i].fileName;
+    imgs[i].imageUrl = require('../images/' + fn);
+  }
+  return imgs;
+})(imageData);
 
 class AppComponent extends React.Component {
   render() {
