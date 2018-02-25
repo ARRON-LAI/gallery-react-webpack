@@ -39,7 +39,7 @@ html, body {
     background-color: #ddd;
     width: 100%;
     height: 100%;
-    overflow: scroll;
+    overflow: hidden;
     position: relative;
 
     @at-root {
@@ -49,7 +49,8 @@ html, body {
         height: 360px;
         box-sizing: border-box;
         margin: 0;
-        padding: 0 40px;
+        padding: 40px;
+        position: absolute;
 
         figcaption {
           text-align: center;
