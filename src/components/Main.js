@@ -19,6 +19,9 @@ class ImageFigure extends React.Component {
     let styleObj = null;
     if (this.props.arrange && this.props.arrange.pos) {
       styleObj = this.props.arrange.pos;
+      ['ms', 'Moz', 'Webkit', ''].forEach( value => {
+        styleObj[value + 'Transform'] = 'rotate(' + this.props.arrange.rotate + ')';
+      });
     }
     return (
       <figure className="img-figure" style={styleObj}>
@@ -43,7 +46,8 @@ class AppComponent extends React.Component {
         //   pos: {
         //     left: 0,
         //     top: 0
-        //   }
+        //   };
+        //   rotate : 0
         // }
       ]
     }
@@ -95,6 +99,9 @@ class AppComponent extends React.Component {
   getRandomPos(low, high) {
     return Math.ceil(Math.random() * (high - low) + low);
   }
+  getRandomRoatate() {
+    return (Math.random() > 0.5 ? '' : '-') + Math.ceil(Math.random() * 30) + 'deg';
+  }
 
   rearrange(index) {
     // centeralize figure[index] and rearrange all imgs 
@@ -107,6 +114,7 @@ class AppComponent extends React.Component {
     // centeralize figure[index]
     const centerImgArr = imgArrangeArr.splice(index, 1);
     centerImgArr[0].pos = centerPos;
+    centerImgArr[0].rotate = '0deg';
 
     // arrange top section images (can hold 0 image)
     const topNum = Math.floor(Math.random() * 2),
@@ -116,7 +124,8 @@ class AppComponent extends React.Component {
       topImgArr[index].pos = {
         left: this.getRandomPos(vPosRange.x[0], vPosRange.x[1]),
         top: this.getRandomPos(vPosRange.topY[0], vPosRange.topY[1])
-      }
+      };
+      topImgArr[index].rotate = this.getRandomRoatate();
     });
 
     // arrange left section and right section images
@@ -130,7 +139,8 @@ class AppComponent extends React.Component {
       imgArrangeArr[i].pos = {
         left: this.getRandomPos(hPosLeftOrRightRange.x[0], hPosLeftOrRightRange.x[1]),
         top: this.getRandomPos(hPosRange.y[0], hPosRange.y[1])
-      }
+      };
+      imgArrangeArr[i].rotate = this.getRandomRoatate();
     }
 
     if (topImgArr && topImgArr[0]) {
@@ -151,7 +161,8 @@ class AppComponent extends React.Component {
           pos: {
             left: 0,
             top: 0
-          }
+          },
+          rotate: 0
         }
       }
     })
