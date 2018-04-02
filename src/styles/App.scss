@@ -1,4 +1,12 @@
 /* Base Application Styles */
+@font-face {
+  font-family: "icons-turn-arrow";
+  src: url("../fonts/icons/turn-arrow.eot") format("embeded-opentype"),
+      url("../fonts/icons/turn-arrow.woff") format("woff"),
+      url("../fonts/icons/turn-arrow.ttf") format("truetype"),
+      url("../fonts/icons/turn-arrow.svg") format("svg");
+}
+
 html, body {
   color: #fff;
   background: #222;
@@ -46,28 +54,34 @@ html, body {
 
     @at-root {
       .img-figure {
-        background-color: #fff;
-        width: 320px;
-        height: 360px;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 40px;
-        position: absolute;
-        transform-style: preserve-3d;
-        transition: left .6s ease-in-out, top .6s ease-in-out, transform .6s ease-in-out;
-        transform-origin: 0 50% 0;
+          position: absolute;
 
-        &.is-inverse {
-          transform: translateX(320px) rotateY(180deg);
-        }
+          width: 320px;
+          height: 360px;
+          margin: 0;
+          padding: 40px;
 
-        figcaption {
+          background-color: #fff;
+
+          box-sizing: border-box;
+          cursor: pointer;
+          transform-origin: 0 50% 0;
+          transform-style: preserve-3d;
+          transition: transform .6s ease-in-out, left .6s ease-in-out, top .6s ease-in-out;
+
+          &.is-inverse {
+              transform: translate(320px) rotateY(180deg);
+          }
+      }
+
+      figcaption {
           text-align: center;
 
           .img-title {
-            font-size:16px;
-            margin: 20px 0 0 0;
-            color: #a7a0a2;
+              margin: 20px 0 0 0;
+
+              color: #a7a0a2;
+              font-size: 16px;
           }
 
           .img-back {
@@ -92,13 +106,11 @@ html, body {
             backface-visibility: hidden;
 
             p {
-              color: #333;
-              font-size: 16px;
+              margin: 0;
             }
           }
-        }
       }
-    }
+  }
   }
   /* image section start */
 
@@ -110,6 +122,44 @@ html, body {
     z-index: 101;
     width: 100%;
     text-align: center;
+
+    @at-root {
+      .control-unit {
+        display: inline-block;
+        background-color: #aaa;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        transform: scale(.5);
+        text-align: center;
+        cursor: pointer;
+        vertical-align: middle;
+        transition: transform .6s ease-in-out, background-color .3s;
+        
+        &.is-center {
+          transform: scale(1);
+          background-color: #888;
+          vertical-align: middle;
+
+          &::after {
+            // content: ;
+            color: #fff;
+            font-family: "icons-turn-arrow";
+            content: "\e600";
+            line-height: 30px;
+            font-size: 80%;
+
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
+
+          &.is-inverse {
+            background-color: #555;
+            transform: rotateY(180deg);
+          }
+        }
+      }
+    }
   }
   /* controller end*/
 }

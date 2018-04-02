@@ -4,6 +4,27 @@ require('styles/App.scss');
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+class ControlUnit extends React.Component {
+  handleClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (this.props.arrange.isCenter) {
+      this.props.inverse();
+    } else {
+      this.props.centralize();
+    }
+  }
+
+  render() {
+    let className = 'control-unit';
+    className += (this.props.arrange.isCenter ? ' is-center' : '') +
+                (this.props.arrange.isCenter && this.props.arrange.isInverse ? ' is-inverse' : '');
+    return (
+      <span className={className} onClick={this.handleClick.bind(this)}></span>
+    )
+  }
+}
+
 let imageData = require('../data/imageData.json');
 
 imageData = (function genImageData(imgs) {
@@ -196,9 +217,10 @@ class AppComponent extends React.Component {
   }
 
   render() {
-    let imageFigures = [];
+    let controlUnits = [],
+      imageFigures = [];
     imageData.forEach( (value, index) => {
-      imageFigures.push(<ImageFigure data={value} ref={'imgFigure' + index} arrange={this.state.imgArrangeArr[index]} inverse={this.inverse(index)} centralize={this.centralize(index)}/>);
+      imageFigures.push(<ImageFigure key={index} data={value} ref={'imgFigure' + index} arrange={this.state.imgArrangeArr[index]} inverse={this.inverse(index)} centralize={this.centralize(index)}/>);
       if (!this.state.imgArrangeArr[index]) {
         this.state.imgArrangeArr[index] = {
           pos: {
@@ -210,13 +232,16 @@ class AppComponent extends React.Component {
           isCenter: false
         }
       }
+      controlUnits.push(<ControlUnit key={index} arrange={this.state.imgArrangeArr[index]} inverse={this.inverse(index)} centralize={this.centralize(index)}/>);
     })
     return (
       <section className="stage">
         <section className="img-sec" ref="imgSec">
           {imageFigures}
         </section>
-        <nav className="controller"></nav>
+        <nav className="controller">
+          {controlUnits}
+        </nav>
       </section>
     );
   }
